@@ -1,13 +1,9 @@
 <script setup>
-import Animes from "../assets/MyProject/gamerAcg-List.json";
-import { ref } from 'vue'
 
 defineProps({
-  msg: String,
+  animes: Object,
 })
 
-const count = ref(0)
-const animes = ref(Animes)
 
 </script>
 
@@ -19,6 +15,5 @@ const animes = ref(Animes)
   </div>
 </template>
 
-<style scoped>
-
+<style>
 </style>
