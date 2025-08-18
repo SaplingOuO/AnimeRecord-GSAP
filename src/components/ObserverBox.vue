@@ -1,26 +1,3 @@
-<template>
-  <div class="gallery-container" ref="container">
-    <div
-      v-for="item in animes"
-      :key="item.num"
-      class="gallery-item"
-      :style="{ backgroundImage: `url(${getImageUrl(item.image)})` }"
-      @click="showDetail(item)"
-    ></div>
-
-    <!-- 詳細資訊視窗 -->
-    <div v-if="selectedItem" class="modal" @click="selectedItem = null">
-      <div class="modal-content" @click.stop>
-        <h2>{{ selectedItem.cn }}</h2>
-        <p>日文：{{ selectedItem.jp }}</p>
-        <p>英文：{{ selectedItem.en }}</p>
-        <p>發售日：{{ selectedItem.releaseDate }}</p>
-        <p>季度：{{ selectedItem.season }}</p>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import gsap from 'gsap'
@@ -89,6 +66,29 @@ function loadMoreItems() {
   )
 }
 </script>
+
+<template>
+  <div class="gallery-container" ref="container">
+    <div
+      v-for="item in animes"
+      :key="item.num"
+      class="gallery-item"
+      :style="{ backgroundImage: `url(${getImageUrl(item.image)})` }"
+      @click="showDetail(item)"
+    ></div>
+
+    <!-- 詳細資訊視窗 -->
+    <div v-if="selectedItem" class="modal" @click="selectedItem = null">
+      <div class="modal-content" @click.stop>
+        <h2>{{ selectedItem.cn }}</h2>
+        <p>日文：{{ selectedItem.jp }}</p>
+        <p>英文：{{ selectedItem.en }}</p>
+        <p>發售日：{{ selectedItem.releaseDate }}</p>
+        <p>季度：{{ selectedItem.season }}</p>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .gallery-container {

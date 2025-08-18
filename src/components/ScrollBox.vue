@@ -1,4 +1,4 @@
-<!-- ScrollBox.vue -->
+<!-- ScrollBox.vue
 <template>
   <div class="container">
     <div class="spacer">（這裡是滾動前的空白區域）</div>
@@ -57,5 +57,57 @@ onMounted(() => {
   font-size: 20px;
   margin: 0 auto;
   border-radius: 10px;
+}
+</style> -->
+
+<template>
+  <div class="box" ref="box">拖我 / 滾我 / 按方向鍵</div>
+</template>
+
+<script setup>
+import { onMounted, ref } from 'vue'
+import gsap from 'gsap'
+import { Observer } from 'gsap/Observer'
+
+gsap.registerPlugin(Observer)
+
+const box = ref(null)
+
+onMounted(() => {
+  Observer.create({
+    target: window,
+    type: 'wheel,pointer,touch,keys',
+    onWheel: (self) => {
+      let scaleChange = self.deltaY > 0 ? -0.1 : 0.1
+      gsap.to(box.value, { scale: '+=' + scaleChange, duration: 0.2 })
+    },
+    onDrag: (self) => {
+      gsap.to(box.value, {
+        x: `+=${self.deltaX}`,
+        y: `+=${self.deltaY}`,
+        duration: 0.1,
+        overwrite: true
+      })
+    },
+    onKeyDown: (self) => {
+      if (self.key === 'ArrowRight') gsap.to(box.value, { rotation: '+=15' })
+      if (self.key === 'ArrowLeft') gsap.to(box.value, { rotation: '-=15' })
+    },
+    preventDefault: true,
+  })
+})
+</script>
+
+<style scoped>
+.box {
+  width: 200px;
+  height: 200px;
+  background: orange;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-weight: bold;
 }
 </style>
