@@ -2,13 +2,13 @@
 <script setup>
 import animeData from './assets/MyProject/gamerAcg-List.json'
 // import HelloWorld from './components/HelloWorld.vue'
-import ScrollBox from './components/ScrollBox.vue'
+import TestS from './components/TestS.vue'
 // import ObserverBox from './components/ObserverBox.vue'
 </script>
 
 <template>
   <!-- <HelloWorld :animes="animeData"/> -->
-  <ScrollBox />
+  <TestS :animes="animeData"/>
   <!-- <ObserverBox :animes="animeData" /> -->
 </template>
 
