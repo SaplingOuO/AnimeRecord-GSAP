@@ -18,13 +18,13 @@ import BackgroundVideo from './components/BackgroundVideo.vue'
   <!-- 主畫面 -->
   <div>
     <!-- 背景影片or圖片 -->
-    <BackgroundVideo :animes="animeData"/>
+    <!-- <BackgroundVideo :animes="animeData"/> -->
 
     <!-- 畫面中央 -->
     <div></div>
 
     <!-- 底部橫向卷軸 -->
-    <HelloWorld :animes="animeData"/>
+    <HelloWorld/>
 
     <!-- 側邊縱向卷軸 -->
      <div></div>
