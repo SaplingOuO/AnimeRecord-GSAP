@@ -8,12 +8,13 @@ gsap.registerPlugin(Draggable, InertiaPlugin);
 
 onMounted(() => {
   const ul = document.querySelector(".item-list");
-  const images = ul.querySelectorAll("img");
   const items = ul.querySelectorAll(".item");
+  const images = ul.querySelectorAll("img");
+
   const screenCenterX = window.innerWidth / 2;
   const cardWidth = items[0].offsetWidth;
 
-  // 等待圖片全部載入後再開始
+  // 等圖片載入完成後再初始化
   let loadedCount = 0;
   images.forEach(img => {
     img.addEventListener("load", () => {
@@ -24,12 +25,15 @@ onMounted(() => {
     });
   });
 
-  function initDraggable() {
-    const cardWidth = items[0].offsetWidth; //卡片寬度
-    const snapPoints = Array.from(items).map((item, i) => {
-      const cardCenter = i * cardWidth + cardWidth / 2; //卡片中心位置
-      return screenCenterX - cardCenter; //回傳snap值
+  function getSnapPoints() {
+    return Array.from(items).map((_, i) => {
+      const cardCenter = i * cardWidth + cardWidth / 2;
+      return screenCenterX - cardCenter;
     });
+  }
+
+  function initDraggable() {
+    const snapPoints = getSnapPoints();
 
     Draggable.create(ul, {
       type: "x",
@@ -43,19 +47,20 @@ onMounted(() => {
       onDrag: updateScale,
       onThrowUpdate: updateScale
     });
+
+    // 初始化一次縮放（避免載入完成時全都同樣大小）
+    updateScale.call({ target: ul, x: 0 });
   }
-  
+
   function updateScale() {
-    let ul = this.target; // 拖拉中的 ul
-    let ulX = this.x;     // ul 的目前偏移量
+    const ulX = this.x ?? 0; // this.x 可能在初始化時不存在
 
     items.forEach((card, i) => {
-      // 計算該卡片的中心點（加上 ul 偏移後）
-      let cardCenter = ulX + i * cardWidth + cardWidth / 2;
-      let distance = Math.abs(screenCenterX - cardCenter);
+      const cardCenter = ulX + i * cardWidth + cardWidth / 2;
+      const distance = Math.abs(screenCenterX - cardCenter);
 
-      // 距離越近 → scale 越大（這裡用簡單線性換算）
-      let scale = gsap.utils.mapRange(0, 200, 1.2, 1)(distance);
+      // 距離越近 → 放大
+      const scale = gsap.utils.mapRange(0, 200, 1.2, 1)(distance);
       gsap.set(card, { scale });
     });
   }
