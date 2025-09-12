@@ -74,18 +74,18 @@ onBeforeUnmount(() => {
   left: -50vw;
   width: 200vw;
   height: 100vh;
-  z-index: -1; /* 放到背景 */
-  pointer-events: none; /* 防止影片擋住操作 */
+  z-index: -1; 
+  pointer-events: none; 
   opacity: 0.2;
 }
 #backgroundImage{
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 100vh;
+  height: 100vh !important;
   transform: translate(-50%, -50%);
-  z-index: -1; /* 放到背景 */
-  pointer-events: none; /* 防止影片擋住操作 */
+  z-index: -1; 
+  pointer-events: none; 
   opacity: 0.2;
 }
 </style>

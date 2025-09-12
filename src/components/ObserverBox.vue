@@ -78,8 +78,8 @@ function loadMoreItems() {
     ></div>
 
     <!-- 詳細資訊視窗 -->
-    <div v-if="selectedItem" class="modal" @click="selectedItem = null">
-      <div class="modal-content" @click.stop>
+    <div v-if="selectedItem" class="custom-modal" @click="selectedItem = null">
+      <div class="custom-modal-content" @click.stop>
         <h2>{{ selectedItem.cn }}</h2>
         <p>日文：{{ selectedItem.jp }}</p>
         <p>英文：{{ selectedItem.en }}</p>
@@ -116,7 +116,7 @@ function loadMoreItems() {
 }
 
 /* 詳細視窗樣式 */
-.modal {
+.custom-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -127,7 +127,7 @@ function loadMoreItems() {
   justify-content: center;
   align-items: center;
 }
-.modal-content {
+.custom-modal-content {
   background: white;
   padding: 20px;
   border-radius: 12px;

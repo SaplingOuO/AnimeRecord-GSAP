@@ -18,7 +18,7 @@ import BackgroundVideo from './components/BackgroundVideo.vue'
   <!-- 主畫面 -->
   <div>
     <!-- 背景影片or圖片 -->
-    <!-- <BackgroundVideo :animes="animeData"/> -->
+    <BackgroundVideo :animes="animeData"/>
 
     <!-- 畫面中央 -->
     <div></div>
@@ -32,4 +32,7 @@ import BackgroundVideo from './components/BackgroundVideo.vue'
 </template>
 
 <style>
+  body{
+    background-color: rgba( 0, 0, 0, 0.2) !important;
+  }
 </style>
