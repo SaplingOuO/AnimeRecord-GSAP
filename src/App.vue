@@ -1,15 +1,18 @@
 <!-- 參考網頁 https://www.palmer-dinnerware.com/ -->
 <script setup>
+import { ref } from 'vue'
 import animeData from './assets/MyProject/gamerAcg-List.json'
-import HelloWorld from './components/HelloWorld.vue'
 import BackgroundVideo from './components/BackgroundVideo.vue'
-// import ObserverBox from './components/ObserverBox.vue'
-</script>
+import CardList from './components/CardList.vue'
+import YearList from './components/YearList.vue'
 
-<!-- <template> -->
-  <!-- <HelloWorld :animes="animeData"/> -->
-  <!-- <ObserverBox :animes="animeData" /> -->
-<!-- </template> -->
+const selectedYear = ref(null);
+
+function handleSelectedYear(year) {
+  console.log("中央年份:", year);
+  selectedYear.value = year;
+}
+</script>
 
 <template>
   <!-- 菜單 -->
@@ -24,10 +27,11 @@ import BackgroundVideo from './components/BackgroundVideo.vue'
     <div></div>
 
     <!-- 底部橫向卷軸 -->
-    <HelloWorld/>
+    <CardList :year="selectedYear" />
 
     <!-- 側邊縱向卷軸 -->
-     <div></div>
+    <YearList @update:selected="handleSelectedYear" />
+    
   </div>
 </template>
 
