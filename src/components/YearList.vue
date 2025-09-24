@@ -10,6 +10,10 @@ gsap.registerPlugin(Draggable, InertiaPlugin);
 const listRef = ref(null);
 const containerRef = ref(null);
 
+const props = defineProps({
+  initialYear: String  // 🟢 傳入初始年份（App.vue 設定 2025）
+});
+
 const animeYears = getAllYears();
 const selectedNumber = ref(null); // 當前中央數字
 const emit = defineEmits(["update:selected"]);
@@ -79,6 +83,18 @@ onMounted(() => {
         }
       }
     });
+
+    // 🟢 初始定位到指定年份
+    if (props.initialYear) {
+      const targetIndex = animeYears.indexOf(props.initialYear);
+      if (targetIndex !== -1) {
+        gsap.set(ul, { y: snapPoints[targetIndex] });
+        draggable.update();
+        updateScale();
+        emit("update:selected", props.initialYear);
+      }
+    }
+
     updateScale();
   }
 

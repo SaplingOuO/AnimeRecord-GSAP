@@ -14,7 +14,5 @@ export function getAllYears() {
 }
 
 export function getLatestYear(){
-  const years = list.map(item => item.releaseDate.slice(0, 4));
-  const uniqueYears = Array.from(new Set(years));
-  return uniqueYears.sort((a, b) => b - a)[0];
+  return getAllYears()[0];
 }

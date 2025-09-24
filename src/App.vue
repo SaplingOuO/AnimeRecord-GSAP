@@ -5,8 +5,10 @@ import animeData from './assets/MyProject/gamerAcg-List.json'
 import BackgroundVideo from './components/BackgroundVideo.vue'
 import CardList from './components/CardList.vue'
 import YearList from './components/YearList.vue'
+import { getLatestYear } from './services/gamerAcg.js'
 
-const selectedYear = ref(null);
+
+const selectedYear = ref(getLatestYear());
 
 function handleSelectedYear(year) {
   console.log("中央年份:", year);
@@ -30,7 +32,7 @@ function handleSelectedYear(year) {
     <CardList :year="selectedYear" />
 
     <!-- 側邊縱向卷軸 -->
-    <YearList @update:selected="handleSelectedYear" />
+    <YearList :initialYear="selectedYear" @update:selected="handleSelectedYear" />
     
   </div>
 </template>
