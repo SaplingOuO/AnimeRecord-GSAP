@@ -152,7 +152,7 @@ onBeforeUnmount(() => {
   <div class="container m-0 p-0 position-absolute">
     <ul ref="listRef" class="item-list m-0 position-absolute d-flex list-unstyled">
       <li class="item" v-for="anime in animes" :key="anime.num">
-        <img class="item-img img-fluid" :src="`/animeImages/${anime.image}`" :alt="anime.cn" loading="lazy" />
+        <img class="item-img img-fluid" :src="`./animeImages/${anime.image}`" :alt="anime.cn" loading="lazy" />
       </li>
     </ul>
   </div>
