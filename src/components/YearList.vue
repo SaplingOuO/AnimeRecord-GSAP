@@ -11,7 +11,7 @@ const listRef = ref(null);
 const containerRef = ref(null);
 
 const props = defineProps({
-  initialYear: String  // 🟢 傳入初始年份（App.vue 設定 2025）
+  initialYear: String,  // 🟢 傳入初始年份（App.vue 設定 2025）
 });
 
 const animeYears = getAllYears();
@@ -55,10 +55,16 @@ onMounted(() => {
       gsap.to(item, { scale, duration: 0.2 });
     });
 
-    // 更新 selectedNumber
+
+    // 更新 selectedNumber & active 狀態
     if (closestItem) {
       selectedNumber.value = closestItem.textContent;
-    }  
+
+      // 移除所有 active class
+      items.forEach(item => item.classList.remove("active"));
+      // 加到最接近中心的那個
+      closestItem.classList.add("active");
+    }
   }
 
   function initDraggable() {
@@ -112,7 +118,7 @@ onMounted(() => {
     <!-- <div class="center-line"></div> -->
     <main ref="containerRef" class="content-body position-relative overflow-hidden">
       <ul ref="listRef" class="item-list list-unstyled m-0">
-        <li class="item text-danger rounded" v-for="year in animeYears" :key="year">{{ year }}</li>
+        <li class="item rounded" v-for="year in animeYears" :key="year">{{ year }}</li>
       </ul>
     </main>
     <div class="selected-display">
@@ -122,6 +128,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* 
+   npm install @fontsource/orbitron
+   import "@fontsource/orbitron/400.css";
+   import "@fontsource/orbitron/700.css";
+*/
 .container {
   position: absolute;
   transform: translate(0, -50%);
@@ -132,8 +143,14 @@ onMounted(() => {
   height: 20vh;
 }
 .item {
-  font-size: 3vb;
+  font-size: 80%;
   padding: 1vh;
+  color: #525252;
+  font-family: 'Orbitron';
+}
+.item.active {
+  color: #00eaff;
+  text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
 }
 .center-line {
   position: absolute;

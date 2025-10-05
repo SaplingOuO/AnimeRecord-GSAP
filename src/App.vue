@@ -7,16 +7,17 @@ import CardList from './components/CardList.vue'
 import YearList from './components/YearList.vue'
 import { getLatestYear } from './services/gamerAcg.js'
 
-
 const selectedYear = ref(getLatestYear());
 
 function handleSelectedYear(year) {
-  console.log("中央年份:", year);
   selectedYear.value = year;
 }
+
+
 </script>
 
 <template>
+  
   <!-- 菜單 -->
   <div></div>
 
@@ -39,6 +40,8 @@ function handleSelectedYear(year) {
 
 <style>
   body{
-    background-color: rgba( 0, 0, 0, 0.2) !important;
+    background-color: rgba( 0, 0, 0, 0.2) !important;  
+    overscroll-behavior: none;
+    touch-action: none; /* 禁止手勢滾動、縮放 */
   }
 </style>

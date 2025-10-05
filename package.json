@@ -10,6 +10,7 @@
     "deploy": "sh deploy.sh"
   },
   "dependencies": {
+    "@fontsource/orbitron": "^5.2.8",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.8",
     "gh-pages": "^6.3.0",
